@@ -7,7 +7,7 @@ def main():
     st.title("LoanPredict+")
 
     # Create a spinner and a message
-    with st.spinner("Welcome to the World of AI in Approval of Loans 🚀"):
+    with st.spinner("Welcoming to the World of AI in Approval of Loans 🚀"):
 
         # Simulate loading data for 2 seconds
         time.sleep(2)
