@@ -4,7 +4,6 @@ from sklearn.linear_model import LogisticRegression
 import logging
 import mysql.connector
 import numpy as np
-import matplotlib.pyplot as plt
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -67,9 +66,8 @@ def predict_loan_approval(model, feature_columns, user_input):
     user_input_df = pd.DataFrame(user_input, index=[0])
     user_input_df['dependents'] = user_input_df['dependents'].apply(preprocess_dependents)
 
-    # Ensure all required columns are present
-    user_input_encoded = pd.get_dummies(user_input_df, drop_first=True)
-    # Align the columns with the training data columns
+    user_input_encoded = pd.get_dummies(user_input_df, columns=user_input_df.columns, drop_first=True)
+
     user_input_encoded = user_input_encoded.reindex(columns=feature_columns, fill_value=0)
 
     prediction = model.predict(user_input_encoded)[0]
@@ -107,7 +105,7 @@ def update_database_loan_application(loan_data):
 
 
 def customer_main():
-    st.title("Loan Approval Predictive Model")
+    st.title("Approval Predictor Plus")
 
     model, feature_columns = train_model()
 
@@ -142,21 +140,11 @@ def customer_main():
     }
 
     if st.button("Predict Loan Approval and Submit Data"):
-        prediction = predict_loan_approval(model, feature_columns, user_input)
+        prediction = predict_loan_approval(model, feature_columns.tolist(), user_input)
         if prediction == "Y":
             st.success("Loan approved!")
         else:
             st.error("Loan denied.")
-
-        # Visualize prediction
-        probabilities = model.predict_proba(create_loan_vector(user_input))[0]
-        labels = ['Denied', 'Approved']
-        plt.bar(labels, probabilities, color=['red', 'green'])
-        plt.xlabel('Loan Status')
-        plt.ylabel('Probability')
-        plt.title('Loan Approval Probability')
-        st.pyplot(plt)
-
         loan_data = {**user_input, "loan_status": prediction}
         try:
             update_database_loan_application(loan_data)

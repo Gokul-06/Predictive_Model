@@ -4,7 +4,7 @@ import admin
 import time
 
 def main():
-    st.title("Loan Application System")
+    st.title("LoanPredict+")
 
     # Create a spinner and a message
     with st.spinner("Welcome to the World of AI in Approval of Loans 🚀"):

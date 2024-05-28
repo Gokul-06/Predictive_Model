@@ -67,7 +67,7 @@ def get_loan_approval_chain():
 
 
 def main():
-    st.title("Loan Approval Predictive Model")
+    st.title("Approval Control Center")
 
     question = st.text_input("Question: ")
 
