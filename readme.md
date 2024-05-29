@@ -21,7 +21,7 @@ LoanPredictor+ is an advanced loan prediction application designed to enhance th
 1. Clone the repository:
    ```bash
    git clone https://github.com/https://github.com/Gokul-06/Predictive_Model
-   cd loanpredictor-plus
+   cd Predictive_Model
    pip install -r requirements.txt
 Contributing
 
