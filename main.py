@@ -25,7 +25,7 @@ def preprocess_dependents(value):
 # Function to train the model using the sample CSV file
 def train_model():
     # Load the CSV file into a pandas DataFrame
-    df = pd.read_csv("Loan_Applications_Sample_All_Accepted.csv")
+    df = pd.read_csv("Loan_Applications_Sample.csv")
 
     # Preprocess 'dependents' data
     df['dependents'] = df['dependents'].apply(preprocess_dependents)
